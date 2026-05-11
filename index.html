@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Living Light Control</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+        color:rgb(47, 247, 7)
+    }
+
+    h1 {
+        text-align: left;
+        margin-bottom: 30px;
+    }
+
+    #controls {
+        max-width: 300px;
+        margin: 0 0;
+        background: rgb(184, 128, 224);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(10, 0, 0, 0.1);
+    }
+
+    .room {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #7c10c0;
+}
+
+    .room-name {
+    flex: 1;        /* keeps the name fixed on the left */
+}
+    label {
+        font-size: 18px;
+    }
+
+    span {
+        font-weight: bold;
+        width: 50px;
+        text-align: right;
+    }
+
+
+/* Toggle switch container */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    margin-left: 100px;
+}
+
+/* Hide the default checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider background */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 26px;
+}
+
+/* Slider knob */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.5s;
+    border-radius: 50%;
+}
+
+/* When checked */
+.switch input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+/* Move knob when checked */
+.switch input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+.room {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #7c10c0;
+}
+
+
+
+
+</style>
+
+
+<body>
+
+    <h1>Smart Living Light Control</h1>
+
+    <div id="controls">
+
+        <div class="room">
+            <span class="room-name">Living Room</span>
+                <label class="switch">
+                    <input type="checkbox" id="lr-toggle">
+                    <span class="slider"></span>
+            </label>
+            <span id="lr-status">OFF</span>
+        </div>
+            <script>
+                document.getElementById("lr-toggle").addEventListener("change", function () {
+                    const status = document.getElementById("lr-status");
+                    status.textContent = this.checked ? "ON" : "OFF";
+});
+            </script>
+        <div class="room">
+            <label>
+                Bathroom
+                <label class="switch">
+                    <input type="checkbox" id="br-toggle">
+                    <span class="slider"></span>
+            </label>
+            <span id="br-status">OFF</span>
+        </div>
+            <script>
+            document.getElementById("br-toggle").addEventListener("change", function () {
+                const status = document.getElementById("br-status");
+                status.textContent = this.checked ? "ON" : "OFF";
+});
+            </script>
+
+        <div class="room">
+            <label>
+                Closet
+                <label class="switch">
+                    <input type="checkbox" id="cl-toggle">
+                    <span class="slider"></span>
+            </label>
+            <span id="cl-status">OFF</span>
+        </div>
+
+        </div>
+            <script>
+                document.getElementById("cl-toggle").addEventListener("change", function () {
+                    const status = document.getElementById("cl-status");
+                    status.textContent = this.checked ? "ON" : "OFF";
+});
+            </script>
+
+    <!-- MQTT.js library -->
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+    <!-- Your logic -->
+    <script src="app.js"></script>
+
+</body>
+</html>
